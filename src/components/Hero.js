@@ -147,7 +147,7 @@ export default function Hero({ isReady }) {
                 <div className={styles.heroVisual}>
                     {isReady ? (
                         <div className={styles.splineWrapper}>
-                            <Spline scene="/scene.splinecode" />
+                            <Spline scene={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/scene.splinecode`} />
                         </div>
                     ) : (
                         <CubePlaceholder />

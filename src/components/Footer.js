@@ -8,7 +8,7 @@ export default function Footer() {
                 <div className={styles.footerGrid}>
                     <div className={styles.footerBrand}>
                         <div className={styles.footerLogo}>
-                            <Image src="/media/logo.png" alt="Robotics Club Logo" width={32} height={32} className={styles.footerLogoIcon} />
+                            <Image src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/logo.png`} alt="Robotics Club Logo" width={32} height={32} className={styles.footerLogoIcon} />
                             Robotics Club
                         </div>
                         <p className={styles.footerDescription}>

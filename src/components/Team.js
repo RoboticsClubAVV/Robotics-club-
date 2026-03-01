@@ -72,7 +72,7 @@ export default function Team() {
                                 <div className={styles.facultyImageWrapper}>
                                     <Image
                                         className={styles.facultyImage}
-                                        src={faculty.image_url || "/media/placeholder.jpg"}
+                                        src={faculty.image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/placeholder.jpg`}
                                         alt={faculty.name}
                                         fill
                                         style={{ objectFit: 'cover' }}
@@ -118,7 +118,7 @@ export default function Team() {
                                 <div key={member.id} className={`${styles.teamCard} glass-card`}>
                                     <Image
                                         className={styles.teamImage}
-                                        src={member.image_url || "/media/placeholder.jpg"}
+                                        src={member.image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/placeholder.jpg`}
                                         alt={member.name}
                                         fill
                                         style={{ objectFit: 'cover' }}
@@ -154,7 +154,7 @@ export default function Team() {
                         <div className={styles.modalBody}>
                             <div className={styles.modalImageWrapper}>
                                 <Image
-                                    src={selectedMember.image_url || "/media/placeholder.jpg"}
+                                    src={selectedMember.image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/placeholder.jpg`}
                                     alt={selectedMember.name}
                                     className={styles.modalImage}
                                     fill

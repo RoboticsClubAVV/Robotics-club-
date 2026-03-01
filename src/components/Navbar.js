@@ -29,7 +29,7 @@ export default function Navbar() {
                     <a href="#" className={styles.logo}>
                         <div className={styles.logoIcon}>
                             <Image
-                                src="/media/logo.png"
+                                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/logo.png`}
                                 alt="Robotics Club Logo"
                                 width={32}
                                 height={32}
