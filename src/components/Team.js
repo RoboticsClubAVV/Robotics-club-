@@ -3,6 +3,12 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 
+const getImageUrl = (url) => {
+    if (!url) return `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/placeholder.jpg`;
+    if (url.startsWith('/')) return `${process.env.NEXT_PUBLIC_BASE_PATH || ''}${url}`;
+    return url;
+};
+
 export default function Team() {
     const [selectedMember, setSelectedMember] = useState(null);
     const [faculty, setFaculty] = useState(null);
@@ -72,7 +78,7 @@ export default function Team() {
                                 <div className={styles.facultyImageWrapper}>
                                     <Image
                                         className={styles.facultyImage}
-                                        src={faculty.image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/placeholder.jpg`}
+                                        src={getImageUrl(faculty.image_url)}
                                         alt={faculty.name}
                                         fill
                                         style={{ objectFit: 'cover' }}
@@ -118,7 +124,7 @@ export default function Team() {
                                 <div key={member.id} className={`${styles.teamCard} glass-card`}>
                                     <Image
                                         className={styles.teamImage}
-                                        src={member.image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/placeholder.jpg`}
+                                        src={getImageUrl(member.image_url)}
                                         alt={member.name}
                                         fill
                                         style={{ objectFit: 'cover' }}
@@ -154,7 +160,7 @@ export default function Team() {
                         <div className={styles.modalBody}>
                             <div className={styles.modalImageWrapper}>
                                 <Image
-                                    src={selectedMember.image_url || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/placeholder.jpg`}
+                                    src={getImageUrl(selectedMember.image_url)}
                                     alt={selectedMember.name}
                                     className={styles.modalImage}
                                     fill
