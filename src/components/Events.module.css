@@ -104,6 +104,25 @@
     width: fit-content;
 }
 
+.eventImageWrapper {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    background: rgba(124, 58, 237, 0.05);
+}
+
+.eventImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.eventCard:hover .eventImage {
+    transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
     .eventsGrid {
         grid-template-columns: 1fr;

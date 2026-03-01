@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import styles from "./Events.module.css";
 import { supabase } from "@/lib/supabase";
+import Link from "next/link";
 
 export default function Events() {
     const [events, setEvents] = useState([]);
@@ -70,6 +71,11 @@ export default function Events() {
 
                             return (
                                 <div key={event.id} className={`glass-card ${styles.eventCard} fade-in`}>
+                                    {event.image && (
+                                        <div className={styles.eventImageWrapper}>
+                                            <img src={event.image} alt={event.title} className={styles.eventImage} loading="lazy" />
+                                        </div>
+                                    )}
                                     <div className={styles.eventDate}>
                                         <div className={styles.dateIcon}>
                                             <span className={styles.dateMonth}>{dateInfo.month}</span>
@@ -84,13 +90,21 @@ export default function Events() {
                                     </div>
                                     <div className={styles.eventBody}>
                                         <h3 className={styles.eventTitle}>{event.title}</h3>
-                                        <p className={styles.eventDescription}>{event.description}</p>
-                                        <span className={styles.eventTag}>
+                                        <p className={styles.eventDescription}>
+                                            {event.description?.length > 120
+                                                ? event.description.substring(0, 120) + "..."
+                                                : event.description}
+                                        </p>
+                                        <div className="flex items-center gap-4 mt-2">
+                                            <Link href={`/event?id=${event.id}`}
+                                                className="text-xs font-bold text-purple-400 hover:text-purple-300 transition-colors">
+                                                VIEW DETAILS
+                                            </Link>
                                             <a href={event.link || "#"} target="_blank" rel="noopener noreferrer"
-                                                className={`text-xs ${event.comingSoon ? "opacity-50 cursor-not-allowed" : "text-cyan-400 hover:underline"}`}>
+                                                className={`text-xs ${event.comingSoon ? "opacity-50 cursor-not-allowed" : "text-cyan-400 hover:text-cyan-300"}`}>
                                                 {event.comingSoon ? "Registrations Closed" : "Register Here"}
                                             </a>
-                                        </span>
+                                        </div>
                                     </div>
                                 </div>
                             );

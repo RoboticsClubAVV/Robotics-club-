@@ -5,11 +5,11 @@ import Image from "next/image";
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
-    { label: "About", href: "#about" },
-    { label: "Team", href: "#team" },
-    { label: "Events", href: "#events" },
-    { label: "Projects", href: "#projects" },
-    { label: "Contact", href: "#contact" },
+    { label: "About", href: "/#about" },
+    { label: "Team", href: "/#team" },
+    { label: "Events", href: "/#events" },
+    { label: "Projects", href: "/#projects" },
+    { label: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -26,7 +26,7 @@ export default function Navbar() {
         <>
             <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
                 <div className={styles.navContainer}>
-                    <a href="#" className={styles.logo}>
+                    <a href="/" className={styles.logo}>
                         <div className={styles.logoIcon}>
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/logo.png`}
