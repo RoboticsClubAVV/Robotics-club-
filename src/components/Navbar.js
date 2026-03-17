@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
@@ -26,7 +27,7 @@ export default function Navbar() {
         <>
             <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
                 <div className={styles.navContainer}>
-                    <a href="/" className={styles.logo}>
+                    <Link href="/" className={styles.logo}>
                         <div className={styles.logoIcon}>
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/media/logo.png`}
@@ -37,23 +38,23 @@ export default function Navbar() {
                             />
                         </div>
                         Robotics Club
-                    </a>
+                    </Link>
 
                     <div className={styles.navLinks}>
                         {NAV_ITEMS.map((item) => (
-                            <a key={item.href} href={item.href} className={styles.navLink}>
+                            <Link key={item.href} href={item.href} className={styles.navLink}>
                                 {item.label}
-                            </a>
+                            </Link>
                         ))}
                     </div>
 
                     <div className={styles.navActions}>
-                        <a href="/login" className={styles.btnSecondary}>
+                        <Link href="/login" className={styles.btnSecondary}>
                             Login
-                        </a>
-                        <a href="/join-us" className={styles.btnPrimary}>
+                        </Link>
+                        <Link href="/join-us" className={styles.btnPrimary}>
                             Join Us
-                        </a>
+                        </Link>
                     </div>
 
                     <button
@@ -78,14 +79,14 @@ export default function Navbar() {
                     ✕
                 </button>
                 {NAV_ITEMS.map((item) => (
-                    <a
+                    <Link
                         key={item.href}
                         href={item.href}
                         className={styles.mobileLink}
                         onClick={() => setMobileOpen(false)}
                     >
                         {item.label}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </>

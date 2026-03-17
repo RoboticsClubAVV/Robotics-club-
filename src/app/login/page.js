@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -126,7 +127,7 @@ export default function LoginPage() {
                 </form>
 
                 <div className="mt-6 text-center text-sm text-gray-400">
-                    ACCESS DENIED? <a href="/join-us" className="text-cyan-400 hover:underline">REQUEST ACCESS</a>
+                    ACCESS DENIED? <Link href="/join-us" className="text-cyan-400 hover:underline">REQUEST ACCESS</Link>
                 </div>
             </div>
         </div>
