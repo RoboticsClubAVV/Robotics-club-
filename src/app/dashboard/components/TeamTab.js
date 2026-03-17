@@ -3,6 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase";
 
+const getImageUrl = (url) => {
+    if (!url) return null;
+    // Absolute URLs (Supabase storage etc.) — use as-is
+    if (url.startsWith('http')) return url;
+    // Local paths (e.g. /media/Shashwat.jpg) — prepend basePath
+    return `${process.env.NEXT_PUBLIC_BASE_PATH || ''}${url}`;
+};
+
 export default function TeamTab() {
     const [team, setTeam] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -172,7 +180,7 @@ export default function TeamTab() {
                         <label className="block text-xs text-slate-400 mb-1">Upload Profile Photo</label>
                         <div className="flex items-center gap-4 bg-slate-900/50 border border-slate-600 rounded p-4">
                             {currentImageUrl && !imageFile && (
-                                <img src={currentImageUrl} alt="Current" className="w-16 h-16 object-cover rounded shadow border border-slate-700" />
+                                <img src={getImageUrl(currentImageUrl)} alt="Current" className="w-16 h-16 object-cover rounded shadow border border-slate-700" />
                             )}
                             <input
                                 type="file"
@@ -243,7 +251,7 @@ export default function TeamTab() {
                                         </td>
                                         <td className="p-4 flex gap-4 items-center">
                                             {member.image_url ? (
-                                                <img src={member.image_url} alt={member.name} className="w-12 h-12 rounded-full object-cover border border-slate-600 shadow" />
+                                                <img src={getImageUrl(member.image_url)} alt={member.name} className="w-12 h-12 rounded-full object-cover border border-slate-600 shadow" />
                                             ) : (
                                                 <div className="w-12 h-12 rounded-full bg-slate-700 border border-slate-600" />
                                             )}
