@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
 
 const NAV_ITEMS = [
@@ -16,6 +17,24 @@ const NAV_ITEMS = [
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+    const pathname = usePathname();
+
+    const handleNavClick = (e, href) => {
+        // If it's a hash link and we're currently on the home page
+        if (href.startsWith('/#') && pathname === '/') {
+            e.preventDefault();
+            const targetId = href.replace('/#', '');
+            const elem = document.getElementById(targetId);
+            if (elem) {
+                elem.scrollIntoView({ behavior: 'smooth' });
+                // Optional: update URL hash manually
+                if (window.history.pushState) {
+                    window.history.pushState(null, null, href.replace('/', ''));
+                }
+            }
+        }
+        setMobileOpen(false);
+    };
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -42,7 +61,12 @@ export default function Navbar() {
 
                     <div className={styles.navLinks}>
                         {NAV_ITEMS.map((item) => (
-                            <Link key={item.href} href={item.href} className={styles.navLink}>
+                            <Link 
+                                key={item.href} 
+                                href={item.href} 
+                                className={styles.navLink}
+                                onClick={(e) => handleNavClick(e, item.href)}
+                            >
                                 {item.label}
                             </Link>
                         ))}
@@ -83,7 +107,7 @@ export default function Navbar() {
                         key={item.href}
                         href={item.href}
                         className={styles.mobileLink}
-                        onClick={() => setMobileOpen(false)}
+                        onClick={(e) => handleNavClick(e, item.href)}
                     >
                         {item.label}
                     </Link>
