@@ -134,18 +134,18 @@ export default function Hero({ isReady }) {
             <div className={styles.heroContainer}>
                 <div className={styles.heroContent}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                        <div 
+                        <div
                             className={styles.badge}
-                            style={!isRecruiting ? { 
-                                borderColor: 'rgba(34, 197, 94, 0.3)', 
-                                backgroundColor: 'rgba(34, 197, 94, 0.1)', 
+                            style={!isRecruiting ? {
+                                borderColor: 'rgba(34, 197, 94, 0.3)',
+                                backgroundColor: 'rgba(34, 197, 94, 0.1)',
                                 color: '#22c55e',
                                 marginBottom: 0
                             } : { marginBottom: 0 }}
                         >
-                            <span 
-                                className={styles.badgeDot} 
-                                style={!isRecruiting ? { backgroundColor: '#22c55e', boxShadow: '0 0 8px #22c55e' } : {}} 
+                            <span
+                                className={styles.badgeDot}
+                                style={!isRecruiting ? { backgroundColor: '#22c55e', boxShadow: '0 0 8px #22c55e' } : {}}
                             />
                             {isRecruiting ? "Now Recruiting Members" : "Welcome Club Members"}
                         </div>
