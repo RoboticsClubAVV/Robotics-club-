@@ -1,8 +1,9 @@
 "use client";
 
 import styles from "./Hero.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { supabase } from "@/lib/supabase";
 // Lazy load spline to improve performance on main thread
 const Spline = dynamic(() => import('@splinetool/react-spline'), {
     ssr: false,
@@ -52,7 +53,23 @@ function CubePlaceholder() {
 }
 
 export default function Hero({ isReady }) {
+    const [isRecruiting, setIsRecruiting] = useState(true);
+
     useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const { data } = await supabase
+                    .from('settings')
+                    .select('value')
+                    .eq('id', 'is_recruiting')
+                    .single();
+                if (data) setIsRecruiting(data.value);
+            } catch (err) {
+                console.error("Error fetching recruitment setting:", err);
+            }
+        };
+        fetchSettings();
+
         const textElement = document.querySelector('.typewriter-text');
         if (!textElement) return;
 
@@ -116,9 +133,22 @@ export default function Hero({ isReady }) {
         <section className={styles.hero} id="home">
             <div className={styles.heroContainer}>
                 <div className={styles.heroContent}>
-                    <div className={styles.badge}>
-                        <span className={styles.badgeDot} />
-                        Now Recruiting Members
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                        <div 
+                            className={styles.badge}
+                            style={!isRecruiting ? { 
+                                borderColor: 'rgba(34, 197, 94, 0.3)', 
+                                backgroundColor: 'rgba(34, 197, 94, 0.1)', 
+                                color: '#22c55e',
+                                marginBottom: 0
+                            } : { marginBottom: 0 }}
+                        >
+                            <span 
+                                className={styles.badgeDot} 
+                                style={!isRecruiting ? { backgroundColor: '#22c55e', boxShadow: '0 0 8px #22c55e' } : {}} 
+                            />
+                            {isRecruiting ? "Now Recruiting Members" : "Welcome Club Members"}
+                        </div>
                     </div>
 
                     <h1 className={styles.heroTitle}>

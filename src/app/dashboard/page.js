@@ -8,6 +8,7 @@ import EventsTab from "./components/EventsTab";
 import InventoryTab from "./components/InventoryTab";
 import AllocationsTab from "./components/AllocationsTab";
 import TeamTab from "./components/TeamTab";
+import SettingsTab from "./components/SettingsTab";
 
 export default function DashboardPage() {
     const [activeTab, setActiveTab] = useState("applicants");
@@ -87,7 +88,8 @@ export default function DashboardPage() {
                         { id: "team", label: "CORE TEAM" },
                         { id: "events", label: "EVENT MANAGEMENT" },
                         { id: "inventory", label: "HARDWARE INVENTORY" },
-                        { id: "allocations", label: "ALLOCATION RECORDS" }
+                        { id: "allocations", label: "ALLOCATION RECORDS" },
+                        { id: "settings", label: "SITE SETTINGS" }
                     ].map(tab => (
                         <button
                             key={tab.id}
@@ -109,6 +111,7 @@ export default function DashboardPage() {
                     {activeTab === "events" && <EventsTab />}
                     {activeTab === "inventory" && <InventoryTab />}
                     {activeTab === "allocations" && <AllocationsTab />}
+                    {activeTab === "settings" && <SettingsTab />}
                 </div>
             </div>
         </div>
